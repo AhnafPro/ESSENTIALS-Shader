@@ -17,9 +17,16 @@ uniform vec3 shadowLightPosition;
 uniform float sunAngle;
 
 const vec3 blocklightColor = vec3(1.0, 0.55, 0.15);
-const vec3 skylightColor   = vec3(0.1, 0.35, 0.9);
+const vec3 skylightColor   = vec3(0.15, 0.25, 0.45);
 const vec3 sunlightColor   = vec3(1.0, 0.92, 0.85);
 const vec3 ambientColor    = vec3(0.01, 0.01, 0.02);
+
+const bool shadowtex0Nearest = true;
+const bool shadowtex1Nearest = true;
+const bool shadowcolor0Nearest = true;
+
+#define SHADOW_RADIUS 1
+#define SHADOW_RANGE 2
 
 varying vec2 texcoord;
 
@@ -45,6 +52,27 @@ vec3 getShadow(vec3 shadowScreenPos) {
     return shadowColor.rgb * (1.0 - shadowColor.a);
 }
 
+vec3 getSoftShadow(vec4 shadowClipPos) {
+    vec3 shadowAccum = vec3(0.0);
+    const int samples = SHADOW_RANGE * SHADOW_RANGE * 4;
+
+    for (int x = -SHADOW_RANGE; x < SHADOW_RANGE; x++) {
+        for (int y = -SHADOW_RANGE; y < SHADOW_RANGE; y++) {
+            vec2 offset = vec2(x, y) * float(SHADOW_RADIUS) / float(SHADOW_RANGE);
+            offset /= float(shadowMapResolution);
+
+            vec4 offsetShadowClipPos  = shadowClipPos + vec4(offset, 0.0, 0.0);
+            offsetShadowClipPos.z    -= 0.001;
+            offsetShadowClipPos.xyz   = distort(offsetShadowClipPos.xyz);
+            vec3 shadowNdcPos         = offsetShadowClipPos.xyz / offsetShadowClipPos.w;
+            vec3 shadowScreenPos      = shadowNdcPos * 0.5 + 0.5;
+            shadowAccum              += getShadow(shadowScreenPos);
+        }
+    }
+
+    return shadowAccum / float(samples);
+}
+
 void main() {
     vec4 color = texture2D(colortex0, texcoord);
     color.rgb = pow(color.rgb, vec3(2.2));
@@ -63,12 +91,8 @@ void main() {
     vec3 feetPlayerPos = (gbufferModelViewInverse * vec4(viewPos, 1.0)).xyz;
     vec3 shadowViewPos = (shadowModelView * vec4(feetPlayerPos, 1.0)).xyz;
     vec4 shadowClipPos = shadowProjection * vec4(shadowViewPos, 1.0);
-    shadowClipPos.z -= 0.001;
-    shadowClipPos.xyz = distort(shadowClipPos.xyz);
-    vec3 shadowNdcPos    = shadowClipPos.xyz / shadowClipPos.w;
-    vec3 shadowScreenPos = shadowNdcPos * 0.5 + 0.5;
 
-    vec3 shadow = getShadow(shadowScreenPos);
+    vec3 shadow = getSoftShadow(shadowClipPos);
 
     float timeOfDay = clamp(sin(sunAngle * 3.14159 * 2.0) * 3.0, 0.0, 1.0);
 

@@ -1,3 +1,5 @@
+const int shadowMapResolution = 1024;
+
 float distortionFactor(vec2 shadowPos) {
     return length(shadowPos) * 0.9 + 0.1;
 }
