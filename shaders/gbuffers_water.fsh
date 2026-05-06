@@ -10,15 +10,12 @@ varying vec2 texcoord;
 varying vec4 glcolor;
 varying vec3 viewPos;
 varying vec3 worldNormal;
+varying float isWater;
 
 void main() {
-    vec4 vanillaColor = texture2D(gtexture, texcoord) * glcolor;
-    vanillaColor *= texture2D(lightmap, lmcoord);
-
-    float blueish = vanillaColor.b - max(vanillaColor.r, vanillaColor.g);
-    float isWater = step(0.05, blueish) * step(0.4, vanillaColor.b);
-
     if (isWater < 0.5) {
+        vec4 vanillaColor = texture2D(gtexture, texcoord) * glcolor;
+        vanillaColor *= texture2D(lightmap, lmcoord);
         if (vanillaColor.a < alphaTestRef) discard;
         gl_FragData[0] = vanillaColor;
         return;
