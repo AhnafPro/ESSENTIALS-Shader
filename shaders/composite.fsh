@@ -63,7 +63,7 @@ void main() {
     vec3 feetPlayerPos = (gbufferModelViewInverse * vec4(viewPos, 1.0)).xyz;
     vec3 shadowViewPos = (shadowModelView * vec4(feetPlayerPos, 1.0)).xyz;
     vec4 shadowClipPos = shadowProjection * vec4(shadowViewPos, 1.0);
-    shadowClipPos.z -= 0.0005;
+    shadowClipPos.z -= 0.001;
     shadowClipPos.xyz = distort(shadowClipPos.xyz);
     vec3 shadowNdcPos    = shadowClipPos.xyz / shadowClipPos.w;
     vec3 shadowScreenPos = shadowNdcPos * 0.5 + 0.5;
