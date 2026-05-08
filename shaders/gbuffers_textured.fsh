@@ -1,4 +1,5 @@
 #version 120
+/* DRAWBUFFERS:01 */
 
 uniform sampler2D gtexture;
 uniform sampler2D lightmap;
@@ -17,4 +18,5 @@ void main() {
     }
 
     gl_FragData[0] = color;
+    gl_FragData[1] = vec4(lmcoord, 0.0, 1.0);
 }

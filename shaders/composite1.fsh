@@ -2,14 +2,13 @@
 
 uniform sampler2D colortex0;
 uniform sampler2D depthtex0;
-
 uniform mat4 gbufferProjectionInverse;
 uniform vec3 fogColor;
 uniform float far;
 
-varying vec2 texcoord;
+#define FOG_DENSITY 5.0
 
-const float FOG_DENSITY = 1.2;
+varying vec2 texcoord;
 
 vec3 projectAndDivide(mat4 projectionMatrix, vec3 position) {
     vec4 homPos = projectionMatrix * vec4(position, 1.0);
@@ -28,13 +27,10 @@ void main() {
     vec3 ndcPos  = vec3(texcoord, depth) * 2.0 - 1.0;
     vec3 viewPos = projectAndDivide(gbufferProjectionInverse, ndcPos);
 
-    float dist = length(viewPos);
-    float fogFactor = exp(-dist * (FOG_DENSITY / far));
-    fogFactor = clamp(fogFactor, 0.0, 1.0);
+    float dist      = length(viewPos) / far;
+    float fogFactor = exp(-FOG_DENSITY * (1.0 - dist));
 
-    vec3 linearFogColor = pow(fogColor, vec3(2.2));
-
-    color.rgb = mix(linearFogColor, color.rgb, fogFactor);
+    color.rgb = mix(color.rgb, pow(fogColor, vec3(2.2)), clamp(fogFactor, 0.0, 1.0));
 
     gl_FragData[0] = color;
 }
