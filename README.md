@@ -13,19 +13,18 @@ There are lots of lightweight shaders, and they are said to preserve FPS well, b
 
 **Shadows**
 - Soft shadows
-- Shadow distortion optimization
+- Shadow optimization
 
 **Atmosphere**
 - Depth-based fog
 - Fake sun rays & moon rays
 - Custom sky gradient
-- Sunrise/sunset tinting
+- Sunrise/sunset
 
 **Water**
 - Fresnel transparency effect
 - Subtle wave animation
 - Deep/shallow color mixing
-- Sun specular highlight
 
 **Reflections**
 - Block specific specular (metals, glass, ice)
