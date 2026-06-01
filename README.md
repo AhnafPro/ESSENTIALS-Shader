@@ -26,10 +26,6 @@ There are lots of lightweight shaders, and they are said to preserve FPS well, b
 - Subtle wave animation
 - Deep/shallow color mixing
 
-**Reflections**
-- Block specific specular (metals, glass, ice)
-- Fresnel surface sheen
-
 
 
 ## ⚙️ Benchmarks
