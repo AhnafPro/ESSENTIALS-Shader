@@ -34,4 +34,4 @@ void main() {
     float alpha = glcolor.a * mix(0.7, 1.0, timeOfDay);
 
     gl_FragData[0] = vec4(cloudColor, alpha);
-}
+} 

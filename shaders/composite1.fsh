@@ -6,7 +6,7 @@ uniform mat4 gbufferProjectionInverse;
 uniform vec3 fogColor;
 uniform float far;
 
-#define FOG_DENSITY 5.0
+#define FOG_DENSITY 3.0
 
 varying vec2 texcoord;
 
