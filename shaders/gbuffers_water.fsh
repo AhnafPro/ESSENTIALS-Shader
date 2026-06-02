@@ -38,5 +38,5 @@ void main() {
 
     float alpha = mix(0.45, 0.9, fresnel);
 
-    gl_FragData[0] = vec4(waterColor, alpha);
-}
+    gl_FragData[0] = vec4(waterColor, alpha); 
+} 

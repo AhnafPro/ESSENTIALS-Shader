@@ -85,5 +85,5 @@ void main() {
     float fogFactor = exp(-8.0 * (1.0 - dist));
     color.rgb = mix(color.rgb, fogColor, clamp(fogFactor, 0.0, 1.0));
 
-    gl_FragData[0] = color;
-}
+    gl_FragData[0] = color; 
+} 
