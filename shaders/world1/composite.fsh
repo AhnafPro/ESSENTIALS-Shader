@@ -181,4 +181,4 @@ void main() {
     color.rgb += vec3(0.7, 0.8, 1.0) * moonRays;
 
     gl_FragData[0] = color;
-}
+}  
