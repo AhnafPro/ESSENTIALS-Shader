@@ -4,6 +4,8 @@
 There are lots of lightweight shaders, and they are said to preserve FPS well, but ESSENTIALS shader takes it to the BARE BONES next level with fake sunrays/moonrays, semi-realistic water, depth-based fogs, and much more. Yeah, it's probably the worst shader you have come across, but it will surely do what it was made for.
 ##### **TARGET:** The main target of this project is to make shaders also for iGPU users by BRUTALLY optimizing all the visual effects.
 
+[✨ Features](#-features) | [⚙️ Benchmarks](#️-benchmarks) | [📦 Installation](#-installation)
+
 ## ✨ Features
 
 **Lighting**
