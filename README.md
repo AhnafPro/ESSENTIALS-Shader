@@ -48,4 +48,4 @@ The shader was tested on a HP Pro office computer from 2012 to prove the point o
 5. Select **ESSENTIALS Shader** from the list
 6. Done
 
-Compatible with [OptiFine](https://optifine.net/adloadx?f=OptiFine_1.21.4_HD_U_J2.jar) 1.8.9+ and [Iris](https://irisshaders.dev/download) (Higly Reccomended) 1.16+. _Click to visit the software download page._
+Compatible with [OptiFine](https://optifine.net/adloadx?f=OptiFine_1.21.4_HD_U_J2.jar) 1.17+ and [Iris](https://irisshaders.dev/download) (Higly Reccomended) 1.17+. _Click to visit the software download page._
